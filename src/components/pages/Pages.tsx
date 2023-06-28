@@ -15,8 +15,6 @@ const Pages: FC = () => {
     queryFn: () => api.getPages()
   })
 
-  // console.log(data)
-
   return (
     <div css={containerStyle}>
       <div css={subContainerStyle}>
@@ -26,7 +24,7 @@ const Pages: FC = () => {
         {data &&
           data.map((page: Page, i: number) => {
             return (
-              <div css={pageElStyle} onClick={() => setOpenModal(i)}>
+              <div key={i} css={pageElStyle} onClick={() => setOpenModal(i)}>
                 <span>{page.name}</span>
               </div>
             )
