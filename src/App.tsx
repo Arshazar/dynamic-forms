@@ -2,6 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
+import { appStyle } from '@/styles/globalStyles'
+import { Form, Pages } from './components'
+
 function App() {
   const queryClient = new QueryClient()
 
