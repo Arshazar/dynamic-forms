@@ -77,11 +77,12 @@ const PageModal = ({ openModal, setOpenModal, data }) => {
   }
 
   return (
-    <Dialog
-      isShown={typeof openModal === 'number'}
-      title={data.name}
-      onCloseComplete={() => setOpenModal(false)}>
-      {data.elements && data.elements.length > 0 && (
+    data.elements &&
+    data.elements.length > 0 && (
+      <Dialog
+        isShown={typeof openModal === 'number'}
+        title={data.name}
+        onCloseComplete={() => setOpenModal(false)}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {data.elements.map((el: Element, i: number) => (
             <Fragment key={i}>
@@ -91,8 +92,8 @@ const PageModal = ({ openModal, setOpenModal, data }) => {
           ))}
           <Button type="submit">Submit</Button>
         </form>
-      )}
-    </Dialog>
+      </Dialog>
+    )
   )
 }
 
