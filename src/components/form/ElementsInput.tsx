@@ -29,20 +29,6 @@ const ElementsInput: FC<Props> = ({ register, _renderErrorText, errors }) => {
   // const debouncedElements = useDebounce(elements, 600)
   const elementTypes = Object.keys(ElementType).map((key) => ElementType[key])
 
-  // useEffect(() => {
-  //   const finalEls = debouncedElements.map((el: Element) => {
-  //     const newChoices = el.choices
-  //       .map((c) => (c.length > 0 ? c : undefined))
-  //       .filter((c) => c !== undefined)
-
-  //     return {
-  //       ...el,
-  //       choices: newChoices.length > 0 ? newChoices : undefined
-  //     }
-  //   })
-  //   setElements(finalEls)
-  // }, [debouncedElements])
-
   const handleAddingElement = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setElements([
