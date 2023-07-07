@@ -11,9 +11,23 @@ import { api } from '@/api'
 
 const Input = ({ el, register, watch }) => {
   const { type, name, choices, requiredIf, editableIf, visibleIf } = el
-  const isRequired = !watch(requiredIf)
-  const isEditable = watch(editableIf)
-  const isVisible = !watch(visibleIf)
+
+  const handleCondition = (statement: string) => {
+    if (statement) {
+      const conditionalVal = statement.split('==')[1].split(' ').join('').slice(1, -1)
+      const conditionalInput = statement.split('==')[0].split(' ').join('')
+      const conditionalInputVal = watch(conditionalInput) ? watch(conditionalInput) : ''
+      return String(conditionalInputVal) === String(conditionalVal)
+    }
+    return false
+  }
+
+  const isRequired =
+    typeof requiredIf === 'string' && requiredIf.length > 0 ? handleCondition(requiredIf) : true
+  const isEditable =
+    typeof editableIf === 'string' && editableIf.length > 0 ? handleCondition(editableIf) : true
+  const isVisible =
+    typeof visibleIf === 'string' && visibleIf.length > 0 ? handleCondition(visibleIf) : true
 
   if (!isVisible) return null
 
@@ -24,7 +38,7 @@ const Input = ({ el, register, watch }) => {
     checkbox: Checkbox
   }[type]
 
-  const regOptions = { required: isRequired, disabled: isEditable }
+  const regOptions = { required: isRequired, disabled: !isEditable }
 
   const props = () => {
     switch (type) {
